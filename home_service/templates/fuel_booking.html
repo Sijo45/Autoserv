@@ -1,0 +1,176 @@
+{% extends 'index.html' %}
+{% load static %}
+
+	
+{% block body %}
+{% if terror %}
+<script>
+    alert('Booking Successful,we will contact you soon');
+    window.location=('{% url 'fuel_customer_order' %}');
+</script>
+{% endif %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+
+	<div class="w3l_banner_info" style="height:10px">
+		<div class="slider1">
+			<div class="callbacks_container">
+				<ul class="rslides" id="slider3">
+					<li>
+						<div class="slider1-img" style="height:90px">
+							<div class="slider_banner_info">
+
+
+							</div>
+						</div>
+					</li>
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</header>
+
+<section class="contact " id="contact" style="margin-top:7%">
+<h3>Booking Form</h3><iframe style="height:0"></iframe>
+	<!-- contact -->
+	<section id="contact" style="padding:0px">
+		<div class="container">
+			<h5 class="w3ls-title text-center text-uppercase pb-md-5 pb-4"></h5>
+			<div class="row contact-form ">
+                <div class="col-lg-6  mt-lg-0 mt-5 map contact-right">
+
+					<div class="address mt-3">
+						<h5 class="pb-3 text-capitalize"></h5>
+						<address>
+							<img src="{% static 'images/book_now.gif' %}" style="width:100%" alt/>
+						</address>
+					</div>
+				</div>
+				<div class="col-lg-6 wthree-form-left">
+					<!-- contact form grid -->
+					<div class="contact-top1">
+						<form action="#" method="post" class="f-color" enctype="multipart/form-data">
+                            {% csrf_token %}
+							<div class="row">
+                                <div class="col-md-12">
+								<label for="contactusername">Name</label>
+                                    <input class="form-control" type="text" name="name" value="{{ser.user.first_name}}" readonly required="">
+							</div>
+                                <div class="col-md-12">
+								<label for="contactemail">Mobile</label>
+                                  <input class="form-control" type="text" name="contact" value="{{ser.contact}}" required="" readonly>
+							</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+								<label for="contactusername">Address</label>
+                                        <input class="form-control" type="text" name="add" value="{{ser.address}}" required="">
+							</div>
+							<div class="col-md-12">
+								<label for="contactemail">Vehicle Number</label>
+                                        <input class="form-control" type="text" name="vehicle" required="">
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+								<label for="contactusername">Select Fuel type</label>
+                                    <select class="form-control" name="day" required="">
+                                        <option>Petrol</option>
+                                        <option>Diesel</option>
+									</select>
+                                </div>
+
+								
+                            </div>
+							
+							
+
+							 <h4>Pick your location</h4>
+							<div id="map"></div>
+							<button type="button" id="current-location-button">Use my current location</button>
+							<br>
+							<label for="location-input">Selected location:</label>
+							<input type="text" name="hour" id="location-input">
+							<script>
+							  var map = L.map('map').setView([37.7749, -122.4194], 13);
+							  
+							  // Adding OpenStreetMap tile layer
+							  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+								attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+								maxZoom: 18
+							  }).addTo(map);
+							  
+							  // Adding draggable marker to the map
+							  var marker = L.marker([37.7749, -122.4194], {
+								draggable: true
+							  }).addTo(map);
+							  
+							  // Adding event listener to the "Use my current location" button
+							  var currentLocationButton = document.getElementById('current-location-button');
+							  currentLocationButton.addEventListener('click', function() {
+								if (navigator.geolocation) {
+								  navigator.geolocation.getCurrentPosition(function(position) {
+									var currentLocation = {
+									  lat: position.coords.latitude,
+									  lng: position.coords.longitude
+									};
+									map.setView(currentLocation, 13);
+									marker.setLatLng(currentLocation);
+									updateLocationInput(currentLocation);
+								  });
+								} else {
+								  alert('Geolocation is not supported by this browser.');
+								}
+							  });
+							  
+							  // Adding event listener to the marker for dragging event
+							  marker.on('dragend', function(event) {
+								var location = event.target.getLatLng();
+								updateLocationInput(location);
+							  });
+							  
+							  // Function to update the input field with the location
+							  function updateLocationInput(location) {
+								var geocodeUrl = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + location.lat + '&lon=' + location.lng;
+								fetch(geocodeUrl)
+								  .then(response => response.json())
+								  .then(data => {
+									var address = data.display_name;
+									var locationInput = document.getElementById('location-input');
+									locationInput.value = address;
+								  })
+								  .catch(error => console.error(error));	
+							  }
+							  
+							  // Automatically update the input field with the initial location
+							  updateLocationInput(marker.getLatLng());
+							</script> 
+							
+
+
+							<center><button type="submit" class="btn btn-info" style="margin-top:5%;width:90%">Book Now</button></center>
+						</form>
+							</div>
+					<!--  //contact form grid ends here -->
+				</div>
+				<!-- contact details -->
+				<!-- contact map grid -->
+
+				<!--//contact map grid ends here-->
+			</div>
+        </div>
+	</section>
+	</section>
+	<!-- //contact -->
+
+{% endblock %}

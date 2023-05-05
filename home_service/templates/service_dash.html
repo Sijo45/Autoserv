@@ -1,0 +1,35 @@
+{% extends 'admin_navigation.html' %}
+{% load static %}
+{% block p %}
+<div class="cardBox">
+    <a style="text-decoration:none" href={% url 'add_service' %}>
+    <div class="card"> 
+        <div>
+            <div class="numbers"></div>
+            <div class="cardName" href="{% url 'new_service_man' %}">Add Service</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="person-outline"></ion-icon>
+        </div>
+    </div>
+</a>
+
+    <a style="text-decoration:none" href="{% url 'view_service' %}">
+    <div class="card">
+        <div>
+            <div class="numbers">{{count}}</div>
+            <div class="cardName">View service</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="person-outline"></ion-icon>
+        </div>
+    </div>
+
+   
+    </div>
+
+  
+  </div>
+{% endblock %}

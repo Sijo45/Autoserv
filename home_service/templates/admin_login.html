@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+<style>
+	a:hover {
+  background-color: red;
+  padding:20px;
+  border-radius:8px;
+}
+</style>
+
+{% ifequal error "pat" %}
+<script>
+    alert('logged in successfully');
+    window.location=('{% url 'admin_home' %}');
+</script>
+{% endifequal %}
+
+{% ifequal error "notmember" %}
+<script>
+    alert('Your information is pending.plz Update Your Profile 1st.then continue this service');
+    window.location=('{% url 'service_home' %}');
+</script>
+{% endifequal %}
+{% ifequal error "pat2" %}
+<script>
+    alert('logged in successfully');
+    window.location=('{% url 'admin_home' %}');
+</script>
+{% endifequal %}
+{% ifequal error "not" %}
+<script>
+    alert('Username & Password are not Matching');
+</script>
+{% endifequal %}
+
+
+	<div class="w3l_banner_info" style="height:10px">
+		<div class="slider1">
+			<div class="callbacks_container">
+				<ul class="rslides" id="slider3">
+					<li>
+						<div class="slider1-img" style="height:90px">
+							<div class="slider_banner_info">
+
+
+							</div>
+						</div>
+					</li>
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- //banner-slider -->
+</div>
+</header>
+
+<section class="vh-100" style="background-color: #508bfc;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Sign in</h3>
+            <form method="post">
+				{% csrf_token %}
+            <div class="form-outline mb-4">
+              <input type="text" id="typeEmailX-2" class="form-control form-control-lg" name="uname" required/>
+              <label class="form-label" for="typeEmailX-2">USERNAME</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pwd" required/>
+              <label class="form-label" for="typePasswordX-2">PASSWORD</label>
+            </div>
+
+            <!-- Checkbox -->
+           
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+		</form>
+
+            <hr class="my-4">
+
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% load static %}
+<html>
+<head>
+<title>AutoServ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="keywords" content="Home Service Management System a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'css/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style_common.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/footerstyle.css' %}">
+<style>
+    .nav-link:hover {
+  background-color: red;
+  padding:10px;
+  border-radius:8px;
+  
+}
+nav{
+	background-color:black;
+
+}
+.dropdown {
+	display: inline-block;
+	position: relative;
+  }
+
+  .dropdown-options {
+	display: none;
+	position: absolute;
+	overflow: auto;
+	background-color:#fff;
+	border-radius:5px;
+	box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+  }
+  
+  .dropdown:hover .dropdown-options {
+	display: block;
+  }
+  
+  .dropdown-options a {
+	display: block;
+	color: #000000;
+	padding: 5px;
+	text-decoration: none;
+	padding:20px 40px;
+  }
+  
+  .dropdown-options a:hover {
+	color: #0a0a23;
+	background-color: #ddd;
+	border-radius:5px;
+  }
+
+  button:hover{
+	background-color:red;
+  }
+  
+</style>
+</head>
+
+
+<header>
+	<!-- header -->
+	<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="{% url 'home' %}" style="font-size:30px">AutoServ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+		<li class="nav-item ">
+			<a class="nav-link" href="{% url 'fuel_home' %}">
+			   <i class="fa fa-home"></i> Home</a>
+		  </li>
+			<li class="nav-item ">
+			<a class="nav-link" href="{% url 'fuel_service_order' %}">
+				<i class="fa fa-first-order"></i> Bookings </a>
+		  </li>
+		  
+		  <li class="dropdown">
+			  <button class="fa fa-user"></i> Hello,{{request.user.username}}</button>
+			<div class="dropdown-options">
+			  <a href="{% url 'fuel_profile' %}">Profile</a>
+			  <a href="{% url 'fuel_change_password' %}">Change Password</a>
+			  <a href="{% url 'logout' %}">Logout</a>
+			</div>
+		  </li>
+		
+		</ul>
+	</div>
+  </nav>
+</header>
+  {% block body %}
+	<div class="w3l_banner_info" style="height:10px">
+		<div class="slider1">
+			<div class="callbacks_container">
+				<ul class="rslides" id="slider3">
+					<li>
+						<div class="slider1-img" style="height:90px">
+							<div class="slider_banner_info">
+
+
+							</div>
+						</div>
+					</li>
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- //banner-slider -->
+</div>
+
+<section class="contact  py-lg-5 py-md-4 py-md-3 py-2" id="contact" style="margin-top:7%">
+<h3 class="mb-lg-4 mb-md-3 mb-sm-2 mb-2">Fuel provider Home Page</h3>
+<iframe style="height:0">
+
+  </body>
+{% endblock %}

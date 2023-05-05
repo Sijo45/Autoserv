@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+<style>
+	a:hover {
+  background-color: yellow;
+  padding:20px;
+  border-radius:8px;
+}
+</style>
+
+{% ifequal error "pat1" %}
+<script>
+    alert('logged in successfully');
+    window.location=('{% url 'user_home' %}');
+</script>
+{% endifequal %}
+
+{% ifequal error "notmember" %}
+<script>
+    alert('Your information is pending.plz Update Your Profile 1st.then continue this service');
+    window.location=('{% url 'service_home' %}');
+</script>
+{% endifequal %}
+{% ifequal error "pat2" %}
+<script>
+    alert('logged in successfully');
+    window.location=('{% url 'service_home' %}');
+</script>
+{% endifequal %}
+{% ifequal error "pat4" %}
+<script>
+  alert('information pending');
+  window.location=('{% url 'fuel_home' %}')
+</script>
+{% endifequal %}
+{% ifequal error "not" %}
+<script>
+    alert('Username & Password are not Matching');
+</script>
+{% endifequal %}
+<form action="" method="post">
+    {% csrf_token %}
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              {% block name %}
+              <h3 class="mb-5">User login</h3>
+               {% endblock name %}
+              <div class="form-outline mb-4">
+                <input type="text" id="typeEmailX-2" class="form-control form-control-lg" name="uname" />
+                <label class="form-label" for="typeEmailX-2" >Username</label>
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pwd" />
+                <label class="form-label" for="typePasswordX-2" >Password</label>
+              </div>
+  
+              <!-- Checkbox -->
+             
+  
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+              <a href="{% url 'signup' %}"<p style="color:blue">Doesn't have an account?Sign up here</p></a>
+  
+              <hr class="my-4">
+              {% block register %}
+              {% endblock register %}
+              <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
+                type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
+              <button class="btn btn-lg btn-block btn-primary mb-2" style="background-color: #3b5998;"
+                type="submit"><i class="fab fa-facebook-f me-2"></i>Sign in with facebook</button>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+
+
+{% endblock %}

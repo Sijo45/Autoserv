@@ -1,0 +1,44 @@
+{% extends 'admin_navigation.html' %}
+{% load static %}
+{% block p %}
+
+<div class="details">
+  <div class="recentOrders">
+      <div class="cardHeader">
+          <h2 text-align:center>New Service Man</h2>
+      <!--    <a href="#" class="btn">View All</a> -->
+      </div>
+
+      <table>
+          <thead>
+              <tr>
+                  <td>No.</td>
+                  <td>Name</td>
+                  <td>Email</td>
+                  <td>Contact</td>
+                  <td>Service</td>
+                  <td>Status</td>
+                  <td>Action</td>
+                  <td>View Details</td>
+              </tr>
+          </thead>
+
+          <tbody>
+            {% for i in ser %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+              <td>{{i.user.email}}</td>
+              <td>{{i.contact}}</td>
+              <td>{{i.service_name}}</td>
+
+                <td><span class="label label-danger">{{i.status.status}}</span></td>
+                <td><a href="{% url 'status' i.id %}" ><button class="btn btn-primary">assign_status</button></a></td>
+                <td><a href="{% url 'service_man_detail' i.id %}" ><button class="btn btn-info">View Details<i class="fa fa-eye"></i></button></a></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+  </div>
+
+  {% endblock %}

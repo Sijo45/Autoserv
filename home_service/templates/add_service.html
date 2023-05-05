@@ -1,0 +1,36 @@
+{% extends 'admin_navigation.html' %}
+{% load static %}
+{% block p %}
+
+<div style="margin:20px;">
+    <div class="signup-main" style="width:100%;margin-top:0;background-color:#000080;color:#FFFFFF;padding:20px;">
+        <div class="signup-head">
+            <h1 style="color:#FFFFFF;">Add Service</h1>
+        </div>
+        <div class="signup-block" style="background-color:#FFFFFF;padding:20px;border-radius:5px;margin-top:20px;">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="cat" placeholder="Service Name" required="" style="width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:none;margin-right:10px;margin-left:10px;">
+                <input type="file" name="image" required="" style="width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:none;background-color:#F2F2F2;margin-right:10px;margin-left:10px;">
+                <textarea placeholder="Write your description" name="desc" required="" style="width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:none;margin-right:10px;margin-left:10px;"></textarea>
+                <input type="submit" value="Add Service" style="margin-top:10%;background-color:#FFFFFF;border:none;border-radius:5px;padding:10px;color:#0B2E59;font-weight:bold;cursor:pointer;margin-right:10px;margin-left:10px;">
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    input[type=submit]:hover {
+        background-color:#0B2E59;
+        color:#FFFFFF;
+    }
+</style>
+
+
+{% if error %}
+<script>
+    alert('Add 1 new service Successfully');
+    window.location = "{% url 'view_service' %}";
+</script>
+{% endif %}
+    {% endblock %}

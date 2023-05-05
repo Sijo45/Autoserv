@@ -1,0 +1,39 @@
+{% extends 'admin_navigation.html' %}
+{% load static %}
+{% block p %}
+<p>
+    
+    <div class="cardBox">
+        <a style="text-decoration:none" href="{% url 'fuel_new_service_man' %}">
+        <div class="card"> 
+            <div>
+                <div class="numbers">{{acount}}</div>
+                <div class="cardName" <a href="{% url 'new_service_man' %}">New Fuel provider</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="person-outline"></ion-icon>
+            </div>
+        </div>
+    </a>
+    
+        <a style="text-decoration:none" href="{% url 'fuel_all_service_man' %}">
+        <div class="card">
+            <div>
+                <div class="numbers">{{bcount}}</div>
+                <div class="cardName">All Fuelprovider</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="person-outline"></ion-icon>
+            </div>
+        </div>
+
+       
+        </div>
+
+      
+      </div>
+    </p>
+    
+{% endblock %}

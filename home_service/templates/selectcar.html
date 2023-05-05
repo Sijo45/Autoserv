@@ -1,0 +1,149 @@
+{% load static %}
+<html>
+<head>
+<title>AutoServ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="keywords" content="Home Service Management System a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'css/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style_common.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/footerstyle.css' %}">
+<body>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                background-image: linear-gradient(45deg, #7c9885, #b5b682);
+            }
+            
+            form {
+                background-color: #fff;
+                padding: 20px;
+                margin: 150px auto;
+                max-width: 600px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            }
+            
+            label {
+                display: block;
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            input[type="text"], select {
+                padding: 10px;
+                font-size: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 100%;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+                background-color: #fff;
+                color: #333;
+            }
+            
+            button[type="submit"] {
+                background-color: #4CAF50;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+            
+            button[type="submit"]:hover {
+                background-color: #3e8e41;
+            }
+            
+            select option {
+                padding: 10px;
+                font-size: 1rem;
+                background-color: #fff;
+                color: #333;
+            }
+        </style>
+        <header>
+            <!-- header -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="{% url 'home' %}" style="font-size:30px">AutoServ</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'user_home' %}">
+                       <i class="fa fa-home"></i> Home</a>
+                  </li>
+                    <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'service' %}">
+                       <i class="fa fa-car"></i> Wishlist </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="background-color:red" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-user"></i> Hello,{{request.user.username}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                          <a class="dropdown-item" href="{% url 'change_password'%}">Change Password</a>
+                          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                      </li>
+             </div>
+            </nav>
+        </header>
+
+
+        <form method="POST">
+       {% csrf_token %} 
+        <!-- First dropdown -->
+        <label>Product</label>
+        <input type='text' value="{{pname}}" name="product">
+<select id="brand" name="brand" onchange="updateModels()">
+    <option value="">Select a brand</option>
+    {% for brand in brands %}
+        <option value="{{ brand.pk }}">{{ brand.carbrand }}</option>
+    {% endfor %}
+</select>
+
+<!-- Second dropdown -->
+{% comment %} <select id="model" name="model">
+    <option value="">Select a model</option>
+</select> {% endcomment %}
+<button type="submit">Submit</submit>
+</form>
+<!-- JavaScript to update second dropdown based on selected brand -->
+{% comment %} <script>
+    function updateModels() {
+        var brand_id = document.getElementById("brand").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/get_carmodels/?brand_id=" + brand_id, true);
+        xhr.onload = function () {
+            var models = JSON.parse(xhr.responseText);
+            var model_select = document.getElementById("model");
+            model_select.innerHTML = '<option value="">Select a model</option>';
+            for (var i = 0; i < models.length; i++) {
+                var option = document.createElement("option");
+                option.value = models[i].pk;
+                option.text = models[i].carmodel;
+                model_select.appendChild(option);
+            }
+        };
+        xhr.send();
+    }
+</script> {% endcomment %}
+
+    </body>
+    </html>
+  

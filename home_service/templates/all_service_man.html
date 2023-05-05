@@ -1,0 +1,48 @@
+{% extends 'admin_navigation.html' %}
+{% block p %}
+
+<div class="details">
+  <div class="recentOrders">
+      <div class="cardHeader">
+          <h2>All Service Man</h2>
+        
+      </div>
+
+      <table>
+          <thead>
+            <tr>
+              <td>No.</td>
+            
+              <td>Name</td>
+              <td>Email</td>
+              <td>Contact</td>
+              <td>Service</td>
+              <td>Status</td>
+              <td>View Detail</td>
+              <td>Action</td>
+          </tr>
+      </thead>
+                              <tbody>
+                              {% for i in ser %}
+                                <tr>
+                                  <td>{{forloop.counter}}</td>
+                                  <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                                  <td>{{i.user.email}}</td>
+                                  <td>{{i.contact}}</td>
+                                  <td>{{i.service_name}}</td>
+                                    {% ifequal i.status.status 'Accept' %}
+                                      <td><span class="label label-success">{{i.status.status}}</span></td>
+                                    {% else %}
+                                    <td><span class="label label-danger">{{i.status.status}}</span></td>
+                                    {% endifequal %}
+                                  <td><a href="{% url 'fuel_service_man_detail' i.id %}" ><button class="btn btn-info">View detail<i class="fa fa-eye"></i></button></a></td>
+                                  <td><a href="{% url 'delete_service_man' i.id %}" ><button class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete<i class="fa fa-trash-o"></i></button></a></td>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+             </div>
+      </div>
+</div>
+    {% endblock %}
